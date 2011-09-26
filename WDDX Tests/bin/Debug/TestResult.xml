@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll" total="19" errors="0" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2011-09-23" time="13:27:08">
+  <environment nunit-version="2.5.10.11092" clr-version="2.0.50727.3623" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug" machine-name="FINANCIALEDGE" user="User" user-domain="FINANCIALEDGE" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll" executed="True" result="Failure" success="False" time="0.591" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="Mueller" executed="True" result="Failure" success="False" time="0.591" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Wddx" executed="True" result="Failure" success="False" time="0.581" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="0.581" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="WddxTest" executed="True" result="Failure" success="False" time="0.581" asserts="0">
+                    <results>
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicArrayDeserialization" executed="True" result="Success" success="True" time="0.020" asserts="23" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicArraySerialization" executed="True" result="Success" success="True" time="0.080" asserts="2" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicStructDeserialization" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicStructSerialization" executed="True" result="Success" success="True" time="0.010" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicTypeDeserialization" executed="True" result="Success" success="True" time="0.010" asserts="9" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBasicTypeSerialization" executed="True" result="Success" success="True" time="0.000" asserts="10" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBinaryDeserialization" executed="True" result="Success" success="True" time="0.000" asserts="22" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestBinarySerialization" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestComplexArrayDeserialization" executed="True" result="Success" success="True" time="0.000" asserts="17" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestComplexArraySerialization" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestComplexStructDeserialization" executed="True" result="Success" success="True" time="0.060" asserts="0" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestComplexStructSerialization" executed="True" result="Success" success="True" time="0.030" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestDataSetDeserialization" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestDataSetSerialization" executed="True" result="Success" success="True" time="0.020" asserts="2" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestDecimalDeserializationBug" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestGenericSerialization" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestIsValid" executed="True" result="Failure" success="False" time="0.120" asserts="1">
+                        <failure>
+                          <message><![CDATA[  Packet is not valid when it should be
+  Expected: True
+  But was:  False
+]]></message>
+                          <stack-trace><![CDATA[at Mueller.Wddx.Tests.WddxTest.TestIsValid() in C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\UnitTests.cs:line 552
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestStringDeserializationBug" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Mueller.Wddx.Tests.WddxTest.TestValidDeserialization" executed="True" result="Failure" success="False" time="0.020" asserts="0">
+                        <failure>
+                          <message><![CDATA[An unexpected exception type was thrown
+Expected: Mueller.Wddx.WddxValidationException
+ but was: System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
+                          <stack-trace><![CDATA[at System.Xml.Schema.XsdValidator.ProcessXsiAttributes(XmlQualifiedName& xsiType, String& xsiNil)
+at System.Xml.Schema.XsdValidator.ProcessElement(Object particle)
+at System.Xml.Schema.XsdValidator.ValidateElement()
+at System.Xml.Schema.XsdValidator.Validate()
+at System.Xml.XmlValidatingReaderImpl.ProcessCoreReaderEvent()
+at System.Xml.XmlValidatingReaderImpl.Read()
+at System.Xml.XmlValidatingReader.Read()
+at Mueller.Wddx.WddxValidator.Deserialize(XmlTextReader input) in C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\WddxValidator.cs:line 76
+at Mueller.Wddx.WddxDeserializer.Deserialize(XmlTextReader input, Boolean validate) in C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\WddxDeserializer.cs:line 85
+at Mueller.Wddx.WddxDeserializer.Deserialize(String WddxPacket, Boolean validate) in C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\WddxDeserializer.cs:line 45
+at Mueller.Wddx.Tests.WddxTest.TestValidDeserialization() in C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\UnitTests.cs:line 567
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

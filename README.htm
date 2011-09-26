@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	 
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>WDDX.NET</title>
+
+        <style type="text/css"> /*<![CDATA[*/ <!-- body,td,th{background:#FFF;font:10pt Verdana,Geneva,Arial,Helvetica,sans-serif;}
+	table{border-collapse:collapse;}
+	th{font-weight:bold;text-align:center;}
+	--> /*]]>*/ 
+	</style>
+    </head>
+    <body>
+        <h3>WDDX.Net</h3>
+        <p>
+            <strong>Version 1.0.4</strong>
+        </p>
+        <p>
+            <a href="mailto:jmueller@swiftk.com">Joel Mueller</a>
+        </p>
+        <p>
+            The only classes you need to know are WddxSerializer and
+            WddxDeserializer. Click <a href="WDDX.Net.chm">here</a> for
+            documentation. For those who want to play with the source, full
+            documentation on the internal API is also supplied <a
+            href="WDDX.Net%20Internals.chm">here</a>. See the "WDDX Tests"
+            project for usage samples and tests.
+        </p>
+        <p>
+            The following table compares the WDDX data types with the .NET
+            Common Language Runtime types that they map to.
+        </p>
+        <table border="1" cellspacing="0">
+            <tr>
+                <th>
+                    WDDX
+                </th>
+                <th>
+                    .NET CLR
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    null
+                </td>
+                <td>
+                    A null object reference (null in C#, Nothing in VB.NET)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    boolean
+                </td>
+                <td>
+                    System.Boolean (bool in C#, Boolean in VB.NET)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    number
+                </td>
+                <td align="middle">
+                    One of the following, depending on what fits: 
+                    <table border="1" cellspacing="0">
+                        <tr>
+                            <th>
+                                CLR
+                            </th>
+                            <th>
+                                C#
+                            </th>
+                            <th>
+                                VB.NET
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Int16
+                            </td>
+                            <td>
+                                short
+                            </td>
+                            <td>
+                                Short
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Int32
+                            </td>
+                            <td>
+                                int
+                            </td>
+                            <td>
+                                Integer
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Int64
+                            </td>
+                            <td>
+                                long
+                            </td>
+                            <td>
+                                Long
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Single
+                            </td>
+                            <td>
+                                float
+                            </td>
+                            <td>
+                                Single
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Double
+                            </td>
+                            <td>
+                                double
+                            </td>
+                            <td>
+                                Double
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                System.Decimal
+                            </td>
+                            <td>
+                                decimal
+                            </td>
+                            <td>
+                                Decimal
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    dateTime
+                </td>
+                <td>
+                    System.DateTime (Date in VB.NET)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    string
+                </td>
+                <td>
+                    System.String (string in C#, String in VB.NET)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    array
+                </td>
+                <td>
+                    System.Collections.ArrayList (see notes below for details)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    struct
+                </td>
+                <td>
+                    System.Collections.Hashtable (see notes below for details)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    recordset
+                </td>
+                <td>
+                    System.Data.DataSet (see notes below for details)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    binary
+                </td>
+                <td>
+                    <p>
+                        A System.Byte array (byte[] in C#, Byte() in VB.NET)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    char
+                </td>
+                <td>
+                    System.Char (char in C#, Char in VB.NET)
+                </td>
+            </tr>
+        </table>
+        <p>
+            * The precision of the System.Decimal type is not directly supported by
+            WDDX; when serialized if numbers have higher precision than 15 they will be first converted to Double.
+        </p>
+        
+        
+        <p>
+            <strong>New in 1.0.4:</strong>
+        </p>
+        <UL>
+           <li>updraded to .net framework 3 -- bilal</li>
+           <li>updated unit test to nunit 2.5 </li>
+           <li>corrected iso8601 date and time interpretation and unit tests. Hours are now correctly translated across time zones.</li>
+           <li>detected but did not fix validator IsValid() function -- known issue</li>
+           <li>introduced System.decimal for improvement precision for up to 15 digits after the decimal</li>
+            
+        </UL>
+        
+        
+        <p>
+            <strong>New in 1.0.3:</strong>
+        </p>
+<UL>
+  <LI>Fixed a bug in string deserialization that could 
+  result in an infinite loop in certain situations. 
+  <LI>Updated unit tests to work with <A 
+  href="http://nunit.sourceforge.net/">NUnit 2.0</A>.
+  <LI>Slight performance improvement when deserializing large 
+recordsets.</LI></UL>
+<P><STRONG>New in 1.0.2:</STRONG> </P>
+        <ul>
+            <li>
+                Fixed minor deserialization bugs for dateTime and string
+                elements in large recordsets.
+            </li>
+        </ul>
+        <p>
+            <strong>New in 1.0.1:</strong>
+        </p>
+        <ul>
+            <li>
+                Fixed date parsing to&nbsp;properly 
+  handle&nbsp;non-ISO8601 dates produced by ColdFusion. 
+            <li>
+                Refactored for better error handling during 
+  serialization.&nbsp; 
+            <li>
+                Known issue - any non-ISO8601 dates (such as
+                2002-7-2T8:3:0-5:0, without leading zeros) will cause XSD
+                validation to fail even though the parser can handle these
+                dates.&nbsp;For this reason, is it possible for
+                WddxDeserializer.IsValid() to return false on a packet that it
+                can successfully parse.
+            </li>
+        </ul>
+        <p>
+            <strong>New in 1.0:</strong>
+        </p>
+        <ul>
+            <li>
+                Support for NUnit 1.11 in the unit tests.
+            </li>
+        </ul>
+        <p>
+            <strong>New in RC2:</strong>
+        </p>
+        <ul>
+            <li>
+                Fixed a bug with serialization of database nulls from 
+  a DataSet. 
+            <li>
+                Made the addition of the XML document declaration optional,
+                with a default of false, as CFWDDX throws an error rather than
+                ignoring the XML declaration.
+            </li>
+        </ul>
+        <p>
+            <strong>New in RC1:</strong>
+        </p>
+        <ul>
+            <li>
+                Added support for WDDX validation via XSD. This is 
+  supported in two ways - WddxDeserializer.IsValid() will determine if the WDDX 
+  packet passed to it is valid WDDX without attempting to deserialize it, and is 
+  extremely fast. There is also an option to validate the WDDX as it is being 
+  deserialized; this option will cause the deserializer to throw an exception 
+  detailing what exactly is wrong with any invalid WDDX that it encounters. Note 
+  that the XSD in question is embedded into the WDDX.Net DLL, meaning that there 
+  is only one file to work with, and no internet access is required to download 
+  an external XSD. 
+            <li>
+                Added support for the WDDX "char" element for escaped 
+  control characters in strings. 
+            <li>
+                Fixed dateTime serialization and deserialization to properly
+                convert to/from UTC time.
+            </li>
+        </ul>
+        <b>Serialization:</b> 
+        <ul>
+            <li>
+                Can serialize to a string or a pre-existing 
+  XmlTextWriter. The pre-existing XmlTextWriter can point to a string, a file, a 
+  network stream, the Response stream in ASP.NET, database, etc... 
+            <li>
+                Any object that implements the IDictionary interface 
+  is serialized into a WDDX "struct" element. This includes the Hashtable, as 
+  well as most other classes that contain name/value pairs. 
+            <li>
+                Any object that implements the ICollection interface 
+  is serialized into a WDDX "array" element. This includes all arrays of all 
+  data types (jagged, single-, and multi-dimensional) as well as the ArrayList 
+  class, and most other classes that contain a collection of items. Since WDDX 
+  doesn't support true multi-dimensional arrays, they are currently flattened to 
+  a one-dimensional array upon serialization. 
+            <li>
+                A byte array is serialized as a WDDX "binary" 
+  element. 
+            <li>
+                A DataSet is serialized as a WDDX "recordset" 
+  element. In the case of a DataSet that contains multiple DataTables, it is 
+  serialized as a WDDX "struct" element that contains multiple "recordset" 
+  elements. The name of each DataTable is the key into the struct. 
+            <li>
+                Any object that doesn't fit a pre-defined serializer, but does
+                have properties or fields will be serialized as a WDDX "struct"
+                element, with the property names/values being the names and
+                values in the struct. If the object has no properties or
+                fields, the serializer will call the ToString() method of the
+                object, and serialize it as a WDDX "string" element.
+            </li>
+        </ul>
+        <b>Deserialization:</b> 
+        <ul>
+            <li>
+                Can deserialize from a string or a pre-existing 
+  XmlTextReader. The pre-existing XmlTextReader can point to a string, a file, a 
+  network stream, a database, etc... 
+            <li>
+                A WDDX "array" element is deserialized into an ArrayList
+                object. In the case of nested (or jagged) arrays, it will be an
+                ArrayList object containing other ArrayList objects. Note that
+                a single-dimensional ArrayList can be converted to an array of
+                native types using the following syntax (C#):<br >
+                <tt>int[] intArray =
+                (int[])theArrayList.ToArray(typeof(int));</tt>
+            <li>
+                A WDDX "struct" element is deserialized into a 
+  Hashtable object. 
+            <li>
+                A WDDX "recordset" element is deserialized into a 
+  DataSet object. Data types and column names are preserved. 
+            <li>
+                A WDDX "binary" element is deserialized into a byte array.
+            </li>
+        </ul>
+        <b>Still to be done:</b> 
+        <ul>
+            <li>
+                Find a way to express ColdFusion's "loose" 
+  interpretation of ISO8601 dates in XSD form, so that WDDX can be reliably 
+  validated. 
+            <li>
+                Implement support for the optional "type" attribute 
+  supported by most WDDX elements. This would allow type preservation for better 
+  round-trips, but would&nbsp;not benefit any non-.NET languages.&nbsp; 
+            <li>
+                Convert multi-dimensional arrays to nested/jagged 
+  arrays before serialization. 
+            <li>
+                Optimize array deserialization to produce arrays of 
+  native types when possible, instead of ArrayList objects. 
+            <li>
+                The above items are more likely to be done if I know someone
+                out there needs/will use them. So if any of these sound good,
+                <a href="mailto:jmueller@swiftk.com">send me a note</a>!
+            </li>
+        </ul>
+        <p style="FONT-SIZE:10px">
+            LEGALESE: This library is provided without any warranty, expressed
+            or implied. I hope it's useful to you, but if it's not, well, you
+            get what you pay for.
+        </p>
+    </body>
+</html>

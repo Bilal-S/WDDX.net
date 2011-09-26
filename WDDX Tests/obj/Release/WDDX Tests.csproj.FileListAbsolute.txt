@@ -1,0 +1,8 @@
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\WDDX Tests.dll.config
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\WDDX Tests.dll
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\nunit.framework.dll
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\Wddx.Net.dll
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\Wddx.Net.xml
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Release\nunit.framework.xml
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\obj\Release\WDDX Tests.dll

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	WDDX XML Schema
+	
+	Converted by Joel Mueller (jmueller@swiftk.com)
+	from the original WDDX DTD: January 29, 2002.
+	
+	Original DTD comments:
+	___________________________________________________________
+	
+	     WDDX DTD
+ 
+     Editor:               Simeon Simeonov (simeons@allaire.com)
+     
+     Contributing authors: Hussain Chinoy (hussain@granularity.com)
+                           Nate Weiss (nweiss@icesinc.com)
+ 
+     Last modified:        October 19, 1999
+ 
+     Copyright (c) 1998, 1999 Allaire Corp. http://www.allaire.com
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="array">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="null"/>
+				<xs:element ref="boolean"/>
+				<xs:element ref="number"/>
+				<xs:element ref="dateTime"/>
+				<xs:element ref="string"/>
+				<xs:element ref="array"/>
+				<xs:element ref="struct"/>
+				<xs:element ref="recordset"/>
+				<xs:element ref="binary"/>
+			</xs:choice>
+			<xs:attribute name="length" type="xs:string" use="required"/>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="binary" type="binaryType"/>
+	<xs:element name="boolean">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:boolean" use="required"/>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="char">
+		<xs:complexType>
+			<xs:attribute name="code" type="xs:hexBinary" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="comment" type="xs:string"/>
+	<xs:element name="data">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="null"/>
+				<xs:element ref="boolean"/>
+				<xs:element ref="number"/>
+				<xs:element ref="dateTime"/>
+				<xs:element ref="string"/>
+				<xs:element ref="array"/>
+				<xs:element ref="struct"/>
+				<xs:element ref="recordset"/>
+				<xs:element ref="binary"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dateTime" type="dateTimeType"/>
+	<xs:element name="field">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="null"/>
+				<xs:element ref="boolean"/>
+				<xs:element ref="number"/>
+				<xs:element ref="dateTime"/>
+				<xs:element ref="string"/>
+				<xs:element ref="binary"/>
+			</xs:choice>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="header">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="comment" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="null">
+		<xs:complexType>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="number" type="numberType"/>
+	<xs:element name="recordset">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="field" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="rowCount" type="xs:nonNegativeInteger" use="required"/>
+			<xs:attribute name="fieldNames" type="xs:string" use="required"/>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="string">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="char"/>
+			</xs:choice>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="struct">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="var">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="null"/>
+				<xs:element ref="boolean"/>
+				<xs:element ref="number"/>
+				<xs:element ref="dateTime"/>
+				<xs:element ref="string"/>
+				<xs:element ref="array"/>
+				<xs:element ref="struct"/>
+				<xs:element ref="recordset"/>
+				<xs:element ref="binary"/>
+			</xs:choice>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="wddxPacket">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="header"/>
+				<xs:element ref="data"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" fixed="1.0"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="binaryType">
+		<xs:simpleContent>
+			<xs:extension base="xs:base64Binary">
+				<xs:attribute name="encoding" type="xs:string" fixed="base64"/>
+				<xs:attribute name="length" type="xs:nonNegativeInteger"/>
+				<xs:attribute name="type" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="dateTimeType">
+		<xs:simpleContent>
+			<xs:extension base="xs:dateTime">
+				<xs:attribute name="type" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="numberType">
+		<xs:simpleContent>
+			<xs:extension base="xs:double">
+				<xs:attribute name="type" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

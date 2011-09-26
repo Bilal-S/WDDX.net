@@ -1,0 +1,5 @@
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\bin\Release\Wddx.Net.dll.config
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\bin\Release\Wddx.Net.dll
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\bin\Release\Wddx.Net.xml
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX.Net\obj\Release\Wddx.Net.dll
