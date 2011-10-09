@@ -1,0 +1,680 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wddx.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Mueller.Wddx.ArraySerializer">
+            <summary>
+            	This class will serialize any object that implements the <see cref="T:System.Collections.ICollection"/>
+            	interface into a WDDX <c>array</c>.
+            </summary>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="T:Mueller.Wddx.IWddxObjectSerializer">
+            <summary>
+            	Interface that defines the behavior for all serializers.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.IWddxObjectSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="M:Mueller.Wddx.ArraySerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.ArraySerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.StructSerializer">
+            <summary>
+            	This class will serialize any object that implements the <see cref="T:System.Collections.IDictionary"/>
+            	interface into a WDDX <c>struct</c>.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.StructSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.StructSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.BinarySerializer">
+            <summary>
+            	Serializes a byte array as a WDDX <c>binary</c> element (Base64-encoded).
+            </summary>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.BinarySerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.BinarySerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.WddxDeserializer">
+            <summary>
+            	This class is the main entry point for deserializing a WDDX packet
+            	into a native CLR object.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.Deserialize(System.String)">
+            <summary>
+            	Deserializes a string containing a WDDX packet. Does not perform validation on the packet.
+            </summary>
+            <param name="WddxPacket">The WDDX packet to be deserialized.</param>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.Deserialize(System.String,System.Boolean)">
+            <summary>
+            	Deserializes a string containing a WDDX packet.
+            </summary>
+            <param name="WddxPacket">The WDDX packet to be deserialized.</param>
+            <param name="validate">
+            	Boolean indicating whether or not validation should be performed during deserialization.
+            </param>
+            <remarks>
+            	If <c>validate</c> is set to <c>true</c>, this method will throw a <see cref="T:Mueller.Wddx.WddxValidationException"/>
+            	if it encounters invalid WDDX.
+            </remarks>
+            <exception cref="T:Mueller.Wddx.WddxValidationException">
+            	The <c>validate</c> parameter is set to <c>true</c> and invalid WDDX is encountered.
+            </exception>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.Deserialize(System.Xml.XmlTextReader)">
+            <summary>
+            	Deserialize an <see cref="T:System.Xml.XmlTextReader"/> pointing to a WDDX packet. 
+            	Does not perform validation on the packet.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.Deserialize(System.Xml.XmlTextReader,System.Boolean)">
+            <summary>
+            	Deserialize an <see cref="T:System.Xml.XmlTextReader"/> pointing to a WDDX packet.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+            <param name="validate">
+            	Boolean indicating whether or not validation should be performed during deserialization.
+            </param>
+            <remarks>
+            	If <c>validate</c> is set to <c>true</c>, this method will throw a <see cref="T:Mueller.Wddx.WddxValidationException"/>
+            	if it encounters invalid WDDX.
+            	
+            	Note that ColdFusion can produce <c>dateTime</c> elements that the WDDX XML Schema
+            	cannot validate, so this method may throw a <see cref="T:Mueller.Wddx.WddxValidationException"/>
+            	for packets that can be successfully deserialized if validation is turned off.
+            </remarks>
+            <exception cref="T:Mueller.Wddx.WddxValidationException">
+            	The <c>validate</c> parameter is set to <c>true</c> and invalid WDDX is encountered.
+            </exception>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.IsValid(System.String)">
+            <summary>
+            	Validates the given WDDX packet against the WDDX XML Schema,
+            	and indicates whether or not the packet passed validation.
+            </summary>
+            <remarks>
+            	ColdFusion can produce <c>dateTime</c> elements that the WDDX XML Schema
+            	cannot validate, so this method may return <b>false</b> for packets that
+            	can be successfully deserialized.
+            </remarks>
+            <param name="WddxPacket">The WDDX packet to be validated.</param>
+            <returns>Returns <c>true</c> if the packet passes validation, <c>false</c> if it does not.</returns>
+        </member>
+        <member name="M:Mueller.Wddx.WddxDeserializer.IsValid(System.Xml.XmlTextReader)">
+            <summary>
+            	Validates the given WDDX packet against the WDDX XML Schema,
+            	and indicates whether or not the packet passed validation.
+            </summary>
+            <remarks>
+            	ColdFusion can produce <c>dateTime</c> elements that the WDDX XML Schema
+            	cannot validate, so this method may return <b>false</b> for packets that
+            	can be successfully deserialized.
+            </remarks>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be validated.</param>
+            <returns>Returns <c>true</c> if the packet passes validation, <c>false</c> if it does not.</returns>
+        </member>
+        <member name="T:Mueller.Wddx.StringSerializer">
+            <summary>
+            	Serializes a string.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.StringSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.StringSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.BinaryDeserializer">
+            <summary>
+            	Deserializes a WDDX binary element into a byte array.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="T:Mueller.Wddx.IWddxElementDeserializer">
+            <summary>
+               Interface that defines the behavior for all deserializers.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.IWddxElementDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as an object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="M:Mueller.Wddx.BinaryDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a byte array, advancing the reader to the next
+            	element.
+            </summary>
+            <remarks>
+            	Binary deserialization can be significantly less-efficient when validating.
+            </remarks>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.BinaryDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.WddxValidator">
+            <summary>
+            	Provides validation services for WDDX.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxValidator.IsValid(System.Xml.XmlTextReader)">
+            <summary>
+            	Validates the given WDDX packet against the WDDX XML Schema,
+            	and indicates whether or not the packet passed validation.
+            	XmlTextReader does not provide data validation only that document is wellformed
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be validated.</param>
+            <returns>Returns <c>true</c> if the packet passes validation, <c>false</c> if it does not.</returns>
+        </member>
+        <member name="M:Mueller.Wddx.WddxValidator.Deserialize(System.Xml.XmlTextReader)">
+            <summary>
+            	Deserialize an <see cref="T:System.Xml.XmlTextReader"/> pointing to a WDDX packet.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+            <exception cref="T:Mueller.Wddx.WddxValidationException">
+            	Invalid WDDX is encountered.
+            </exception>
+        </member>
+        <member name="T:Mueller.Wddx.DataSetSerializer">
+            <summary>
+            	This class serializes a <see cref="T:System.Data.DataSet"/> into a WDDX <c>recordset</c>.
+            </summary>
+            <remarks>
+            	<para>If the DataSet contains more than one <see cref="T:System.Data.DataTable"/>, the DataSet
+            	will be serialized as a <c>struct</c> containing <c>recordset</c>s.  Otherwise, it
+            	will be serialized as a single <c>recordset</c>.</para>
+            	<para>Note that a <c>struct</c> containing <c>recordset</c>s will be deserialized
+            	as a <see cref="T:System.Collections.Hashtable"/> containing <see cref="T:System.Data.DataSet"/>s, so beware of round-trip
+            	issues when working with a <see cref="T:System.Data.DataSet"/> containing multiple <see cref="T:System.Data.DataTable"/>s.</para>
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.DataSetSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="M:Mueller.Wddx.DataSetSerializer.WriteTable(System.Xml.XmlWriter,System.Data.DataTable)">
+            <summary>
+            	Writes out a single DataTable to the XML Stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="table">The DataTable to be written.</param>
+        </member>
+        <member name="P:Mueller.Wddx.DataSetSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.StructDeserializer">
+            <summary>
+            	Deserializes a WDDX struct element into a <see cref="T:System.Collections.Hashtable"/> object.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.StructDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a <see cref="T:System.Collections.Hashtable"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.StructDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.ArrayDeserializer">
+            <summary>
+            	Deserializes a WDDX array element into a <see cref="T:System.Collections.ArrayList"/> object.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.ArrayDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as an <see cref="T:System.Collections.ArrayList"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.ArrayDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.StringDeserializer">
+            <summary>
+            	Deserializes a string.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.StringDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a <see cref="T:System.String"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.StringDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.BoolSerializer">
+            <summary>
+            	Serializes a boolean value.
+            </summary>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.BoolSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.BoolSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.NullSerializer">
+            <summary>
+            	Serializes a null value.
+            </summary>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.NullSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.NullSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.DateTimeSerializer">
+            <summary>
+            	Serializes a <see cref="T:System.DateTime"/> object.
+            </summary>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.DateTimeSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="M:Mueller.Wddx.DateTimeSerializer.ISO8601DateFormatter(System.DateTime)">
+            <summary>
+            	Returns the correctly formatted date in ISO8601 format
+            </summary>
+            <param name="localDateTime">a datetime value in local time format.</param>
+        </member>
+        <member name="P:Mueller.Wddx.DateTimeSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.NumberSerializer">
+            <summary>
+            	Serializes a number.
+            </summary>
+            <remarks>
+            	<para>Any of the following data types will be serialized as a WDDX <c>number</c>
+            	element.</para>
+            	<list type="bullet">
+            		<item><description><see cref="T:System.Byte"/></description></item>
+            		<item><description><see cref="T:System.Int16"/></description></item>
+            		<item><description><see cref="T:System.Int32"/></description></item>
+            		<item><description><see cref="T:System.Int64"/></description></item>
+            		<item><description><see cref="T:System.Single"/></description></item>
+            		<item><description><see cref="T:System.Double"/></description></item>
+            		<item><description><see cref="T:System.Decimal"/>*</description></item>
+            	</list>
+            	
+            	<para>
+            		* WDDX does not support the precision of <see cref="T:System.Decimal"/>, so this type
+            		will be converted to <see cref="T:System.Double"/> before serialization.
+            	</para>
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.NumberSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.NumberSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.WddxObjectSerializerFactory">
+            <summary>
+            	This class provides the appropriate serializer based on the
+            	type of object being serialized.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxObjectSerializerFactory.GetSerializer(System.Object)">
+            <summary>
+            	Returns the appropriate serializer based on an object instance.
+            </summary>
+            <param name="obj">The object to be serialized.</param>
+        </member>
+        <member name="M:Mueller.Wddx.WddxObjectSerializerFactory.GetSerializer(System.Type)">
+            <summary>
+            	Returns the appropriate serializer based on an object type.
+            </summary>
+            <param name="type">The type to be serialized.</param>
+        </member>
+        <member name="T:Mueller.Wddx.GenericSerializer">
+            <summary>
+            	Provides serialization services for any object not covered by a pre-defined serializer.
+            </summary>
+            <remarks>
+            	<para>If the object has properties or fields, they will be serialized to a WDDX struct.
+            	If not, a call to the object's <c>ToString()</c> method will be serialized as a string
+            	value.</para>
+            	
+            	<para>This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.</para>
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxObjectSerializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.GenericSerializer.WriteObject(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Writes the serialized object to the XML stream.
+            </summary>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlTextWriter"/> object.</param>
+            <param name="obj">Object to serialize.</param>
+        </member>
+        <member name="P:Mueller.Wddx.GenericSerializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.DataSetDeserializer">
+            <summary>
+            	Deserializes a WDDX recordset into a <see cref="T:System.Data.DataSet"/> object.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.DataSetDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a <see cref="T:System.Data.DataSet"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.DataSetDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.WddxSerializer">
+            <summary>
+               This class is the main entry point for serializing any object into WDDX.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxSerializer.Serialize(System.Object)">
+            <summary>
+            	Serializes an object to a string.
+            </summary>
+            <param name="obj">The object to be serialized.</param>
+            <returns>A string containing the WDDX packet.</returns>
+        </member>
+        <member name="M:Mueller.Wddx.WddxSerializer.Serialize(System.Xml.XmlWriter,System.Object)">
+            <summary>
+            	Serializes an object to a pre-existing <see cref="T:System.Xml.XmlWriter"/> object.
+            </summary>
+            <remarks>
+            	The <see cref="T:System.Xml.XmlWriter"/> should be pre-initialized, and can be pointed at many things:
+            	a string, a file, a network stream, the ASP.NET Response stream, etc.
+            </remarks>
+            <param name="output">A pre-initialized <see cref="T:System.Xml.XmlWriter"/> object.</param>
+            <param name="obj">The object to be serialized.</param>
+        </member>
+        <member name="P:Mueller.Wddx.WddxSerializer.XmlDeclaration">
+            <summary>
+            	Determines whether or not the XML processing declaration
+            	(&lt;?xml version="1.0"?&gt;) is added to the WDDX packet.
+            	Defaults to <c>false</c>.
+            </summary>
+            <remarks>
+            	As of ColdFusion 5.0, CFWDDX cannot process the XML declaration.
+            </remarks>
+        </member>
+        <member name="T:Mueller.Wddx.WddxValidationException">
+            <summary>
+            	The exception that is thrown when invalid WDDX is encountered.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxValidationException.#ctor(System.String,System.String)">
+            <summary>
+            	Initializes a new instance of the WddxValidationException class,
+            	specifying the validation error message.
+            </summary>
+            <param name="message">A message that describes the current exception.</param>
+            <param name="validationError">A message that describes the specific validation failure.</param>
+        </member>
+        <member name="M:Mueller.Wddx.WddxValidationException.ToString">
+            <summary>
+            	Returns a string that represents the current object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mueller.Wddx.WddxValidationException.ValidationError">
+            <summary>
+            	The error message returned by XSD validation.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.BoolDeserializer">
+            <summary>
+            	Deserializes a boolean element.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.BoolDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a <see cref="T:System.Boolean"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.BoolDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.NullDeserializer">
+            <summary>
+            	Deserializes a WDDX null element.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.NullDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a null object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.NullDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.DateTimeDeserializer">
+            <summary>
+            	Deserializes a dateTime element.
+            </summary>
+            <remarks>
+            	This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.DateTimeDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a <see cref="T:System.DateTime"/> object, advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.DateTimeDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.NumberDeserializer">
+            <summary>
+            	Deserializes a number element.
+            </summary>
+            <remarks>
+            	<para>If the contents of the "number" element contain a decimal point,
+            	the value returned will be a <see cref="T:System.Single"/> if that data type
+            	can hold the number, otherwise it will be a <see cref="T:System.Double"/>.</para>
+            	
+            	<para>If the contents of the "number" element do not contain a decimal point,
+            	the value returned will be a <see cref="T:System.Int32"/> if that data type
+            	can hold the number, otherwise it will be a <see cref="T:System.Int64"/>.</para>
+            
+            	<para>This class is a Singleton class - only one instance of it will ever exist
+            	in a given AppDomain.</para>
+            </remarks>
+            <seealso cref="T:Mueller.Wddx.IWddxElementDeserializer"/>
+        </member>
+        <member name="M:Mueller.Wddx.NumberDeserializer.ParseElement(System.Xml.XmlReader)">
+            <summary>
+            	Parses the WDDX element and returns the deserialized
+            	content as a numeric object (see class reference), advancing the reader to the next
+            	element.
+            </summary>
+            <param name="input">The pre-initialized <see cref="T:System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
+        </member>
+        <member name="P:Mueller.Wddx.NumberDeserializer.Instance">
+            <summary>
+            	Provides access to the instance of this class.
+            </summary>
+        </member>
+        <member name="T:Mueller.Wddx.WddxElementDeserializerFactory">
+            <summary>
+            	This class provides the appropriate deserializer
+            	based on the tag name of the element being processed.
+            </summary>
+        </member>
+        <member name="M:Mueller.Wddx.WddxElementDeserializerFactory.GetDeserializer(System.String)">
+            <summary>
+            	Gets the appropriate deserializer based on the tag name
+            	of the element being processed.
+            </summary>
+            <param name="TagName">A valid WDDX tag name.</param>
+        </member>
+    </members>
+</doc>

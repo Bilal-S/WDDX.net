@@ -150,6 +150,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="wddx_0100.dtd" />
     <EmbeddedResource Include="wddx_0100.xsd" />
   </ItemGroup>

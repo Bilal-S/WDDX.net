@@ -39,7 +39,7 @@ namespace Mueller.Wddx.Tests
             //format first part of the time
             IsoDateString = localDateTime.ToString(@"yyyy-MM-dd\THH:mm:ss", DateTimeFormatInfo.InvariantInfo);
             //check on hours postfix
-            postfix = localOffset.TotalHours.ToString();
+            postfix = localOffset.TotalHours.ToString("00.00");
             //if there is a period replace with colon otherwise add :0
             if (postfix.Contains("."))
             {
@@ -554,6 +554,21 @@ namespace Mueller.Wddx.Tests
             			
 		}
 
+        /// <summary>
+        ///		Tests the validity of a larger WDDX packet read from file. Packet has unnecessary whitespaces as well.
+        /// </summary>
+        [Test]
+        public void TestLargeSample()
+        {
+            string packet = System.IO.File.ReadAllText("LargeWddxSample.xml");
+            WddxDeserializer deserializer = new WddxDeserializer();
+                     
+            Hashtable resultTable = (Hashtable)deserializer.Deserialize(packet);
+
+            Assert.IsTrue(deserializer.IsValid(packet), "Large Packet is not valid when it should be");
+            
+
+        }
 		/// <summary>
 		///		Tests performing validation while deserializing.
 		/// </summary>

@@ -86,9 +86,12 @@ namespace Mueller.Wddx
 						elementValue = deserializer.ParseElement(input);
 						if (firstRow)
 						{
-							// set the data type of the column
-							myDataColumn.DataType = elementValue.GetType();
-							firstRow = false;
+							// set the data type of the column unless the null type is used as element value
+                            if (elementValue != null)
+                            {
+                                myDataColumn.DataType = elementValue.GetType();
+                                firstRow = false;
+                            }
 						}
 						columnData.Add(elementValue);
 					}

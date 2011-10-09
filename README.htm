@@ -209,16 +209,17 @@
         
         
         <p>
-            <strong>New in 1.0.4: (Bilal Soylu)</strong>
+            <strong>New in 1.0.4 (Bilal Soylu):</strong>
         </p>
         <UL>
-           <li>updated to .net framework 3 </li>
-           <li>updated unit test to nunit 2.5 </li>
-           <li>corrected iso8601 date and time interpretation and unit tests. Hours are now correctly translated across time zones.</li>
-           <li>detected but did not fix validator IsValid() function -- known issue</li>
-           <li>introduced System.decimal for improvement precision for up to 15 digits after the decimal</li>
-           <li>using new source code repository at GitHub since the codeplex project seems to have lost maintainers.</li>
-            
+           <li>updraded to .net framework 3</li>
+           <li>updated unit test to nunit 2.5</li>
+           <li>corrected iso8601 date and time interpretation and unit tests. Hours are now correctly translated across time zones.Corrected date time serialization.</li>
+           <li>fixed IsValid() function</li>
+           <li>introduced System.decimal as an alternate numeric return for improvement in precision for up to 15 digits after the decimal</li>
+           <li>upgraded XML checking components to framework 3. Removed obsolete XMLValidatingReader calls in core validators.</li>            
+           <li>ignore whitespace and comments so human formatted xml can be parsed without exceptions.</li>
+           <li>fix handling of dataset with starting null-data records</li>
         </UL>
         
         

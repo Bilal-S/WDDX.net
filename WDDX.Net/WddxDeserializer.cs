@@ -40,7 +40,9 @@ namespace Mueller.Wddx
 			// open an XmlTextReader on the string
 			using (StringReader stream = new StringReader(WddxPacket))
 			{
+
 				XmlTextReader reader = new XmlTextReader(stream);
+                reader.WhitespaceHandling = WhitespaceHandling.None;
 				reader.Namespaces = false;
 				retVal = this.Deserialize(reader, validate);
 				reader.Close();
@@ -88,15 +90,29 @@ namespace Mueller.Wddx
 			{
 				IWddxElementDeserializer deserializer;
 				object retVal = null;
-			
+                int a = 0;
+                
 				while (input.Read())
 				{
-					if (input.NodeType == XmlNodeType.Element && input.Name == "data")
-					{
-						input.Read();  // move to next node after <data>
-						deserializer = WddxElementDeserializerFactory.GetDeserializer(input.Name);
-						retVal = deserializer.ParseElement(input);
-					}
+                    try
+                    {
+                        a++;
+                        //ignore whitespace nodetype, this is most likely introduced when XML is formatted for human reading
+                        if (input.NodeType == XmlNodeType.Element && input.Name == "data" && input.NodeType != XmlNodeType.Whitespace)
+                        {
+                            // advance to next node after <data> this that is not whitespace  
+                            input.Read();
+                            while (input.NodeType == XmlNodeType.Whitespace)
+                            {
+                                input.Read();
+                            };               
+                            
+                            deserializer = WddxElementDeserializerFactory.GetDeserializer(input.Name);
+                            retVal = deserializer.ParseElement(input);
+                        }
+                    } catch (Exception e) {
+                        throw new WddxValidationException("Validation error parsing WDDX packet (C) at node index " + a + ":", e.Message);
+                    }
 				}
 
 				return retVal;

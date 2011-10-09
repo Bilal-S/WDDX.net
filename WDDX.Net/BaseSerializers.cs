@@ -186,12 +186,12 @@ namespace Mueller.Wddx
             //format first part of the time
             IsoDateString = localDateTime.ToString(@"yyyy-MM-dd\THH:mm:ss", DateTimeFormatInfo.InvariantInfo);
             //check on hours postfix
-            postfix = localOffset.TotalHours.ToString();
-            //if there is a period replace with colon otherwise add :0
+            postfix = localOffset.TotalHours.ToString("00.00");
+            //if there is a period replace with colon otherwise add :00
             if (postfix.Contains(".")) {
                 postfix = postfix.Replace(".", ":");
             } else {
-                postfix += ":0";
+                postfix += ":00";
             }
 
 

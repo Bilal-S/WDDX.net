@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
-  <TopNode>[0-1020]C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll</TopNode>
-  <SelectedNode>[0-1016]Mueller.Wddx.Tests.WddxTest.TestIsValid</SelectedNode>
+  <TopNode>[0-1021]C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll</TopNode>
+  <SelectedNode>[0-1022]Mueller</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1020]C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll" Expanded="true" />
-    <Node UniqueName="[0-1021]Mueller" Expanded="true" />
-    <Node UniqueName="[0-1022]Mueller.Wddx" Expanded="true" />
-    <Node UniqueName="[0-1023]Mueller.Wddx.Tests" Expanded="true" />
+    <Node UniqueName="[0-1021]C:\Documents and Settings\User\My Documents\Visual Studio 2008\Projects\WDDX\WDDX Tests\bin\Debug\WDDX Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1022]Mueller" Expanded="true" />
+    <Node UniqueName="[0-1023]Mueller.Wddx" Expanded="true" />
+    <Node UniqueName="[0-1024]Mueller.Wddx.Tests" Expanded="true" />
     <Node UniqueName="[0-1000]Mueller.Wddx.Tests.WddxTest" Expanded="true" />
   </Nodes>
 </VisualState>

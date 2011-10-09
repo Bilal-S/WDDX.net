@@ -15,5 +15,6 @@ namespace Mueller.Wddx
 		/// </summary>
 		/// <param name="input">The pre-initialized <see cref="System.Xml.XmlTextReader"/> pointing to the WDDX to be parsed.</param>
         object ParseElement(XmlReader input);
+        //object ParseElement(XmlValidatingReader input);
     }
 }

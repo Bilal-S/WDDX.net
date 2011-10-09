@@ -11,8 +11,8 @@ namespace Mueller.Wddx
 	/// </summary>
 	internal class WddxValidator
 	{
-		private static XmlSchemaCollection _schemaCache = null;
-        
+		//private static XmlSchemaCollection _schemaCache = null;
+        private static XmlSchemaSet _schemaCache = null;
         private bool _isValid;
 
 		/// <summary>
@@ -26,18 +26,20 @@ namespace Mueller.Wddx
 		{
             try
             {
+                //define the schema set
+                this.SetSchemaSet();
+                // Set the validation settings and schema reference
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ValidationType = ValidationType.Schema;
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
+                settings.Schemas = _schemaCache;
+                settings.ValidationEventHandler += new ValidationEventHandler(this.ValidationCheckHandler);
 
-                XmlValidatingReader reader = new XmlValidatingReader(input);
-                //reader.ValidationType = ValidationType.Schema;
-                reader.ValidationType = ValidationType.Auto;
-                reader.ValidationEventHandler += new ValidationEventHandler(this.ValidationCheckHandler);
-                
-                //TODO: this is where the system validation goes astray. FIXME
-                //the problem will then be triggered during reader.Read()
-                reader.Schemas.Add(this.GetSchema());
-               
-                
-                
+                //set up the reader
+                XmlReader reader = XmlReader.Create(input, settings);
+                       
+                //assume is valid before reading starts
                 _isValid = true;
 
                 // spin through the document if we are not already at final node
@@ -67,23 +69,36 @@ namespace Mueller.Wddx
 		{
 			object retVal = null;
 
-			XmlValidatingReader reader = new XmlValidatingReader(input);
-			reader.ValidationType = ValidationType.Schema;
-			reader.ValidationEventHandler += new ValidationEventHandler(this.ValidationErrorHandler);
+            //define the schema set
+            this.SetSchemaSet();
+            // Set the validation settings and schema reference
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.IgnoreComments = true;
+            settings.IgnoreWhitespace = true;
+            settings.Schemas = _schemaCache;
+            settings.ValidationEventHandler += new ValidationEventHandler(this.ValidationCheckHandler);
 
-			reader.Schemas.Add(this.GetSchema());
+            //set up the reader
+            XmlReader reader = XmlReader.Create(input, settings);       
 
 			IWddxElementDeserializer deserializer;
-			
-			while (reader.Read())
-			{
-				if (reader.NodeType == XmlNodeType.Element && reader.Name == "data")
-				{
-					reader.Read();  // move to next node after <data>
-					deserializer = WddxElementDeserializerFactory.GetDeserializer(reader.Name);
-					retVal = deserializer.ParseElement(reader);
-				}
-			}
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "data")
+                    {
+                        reader.Read();  // move to next node after <data>
+                        deserializer = WddxElementDeserializerFactory.GetDeserializer(reader.Name);
+                        retVal = deserializer.ParseElement(reader);
+                    }
+                }
+            }
+            catch (Exception e) { 
+                //we also mark anything that runs into trouble during Validated desirialization with the validation exception
+                throw new WddxValidationException("Validation error parsing WDDX packet (B).", e.Message);
+            }
 
 			return retVal;
 		}
@@ -99,7 +114,32 @@ namespace Mueller.Wddx
 			throw new WddxValidationException("Validation error parsing WDDX packet.", args.Message);
 		}
 
-        
+        //helper function to set schema set if not already done
+        private void SetSchemaSet()
+        {
+            if (_schemaCache == null)
+            {
+                lock (typeof(WddxDeserializer))
+                {
+                    if (_schemaCache == null)
+                    {
+                        // get the xsd
+                        Stream xsdStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Mueller.Wddx.wddx_0100.xsd");
+                        XmlTextReader xsdReader = new XmlTextReader(xsdStream);
+
+                        //add to schema set
+                        XmlSchemaSet sc = new XmlSchemaSet();
+                        sc.Add("", xsdReader);
+                      
+                        // cache it
+                        _schemaCache = sc;
+                    }
+                }
+            }
+        }
+
+        //depricated function GetSchema needs to be removed -- bsoylu
+        /*
 		private XmlSchemaCollection GetSchema()
 		{
 			if (_schemaCache == null)
@@ -113,7 +153,8 @@ namespace Mueller.Wddx
 						XmlTextReader xsdReader = new XmlTextReader(xsdStream);
 
 						XmlSchemaCollection xsc = new XmlSchemaCollection();
-						xsc.Add(null, xsdReader);
+                        //used to be null set to empty string -- bsoylu
+						xsc.Add("", xsdReader);
 
 						// cache it
 						_schemaCache = xsc;
@@ -122,6 +163,7 @@ namespace Mueller.Wddx
 			}
 
 			return _schemaCache;
-		}
+		} 
+        */
 	}
 }

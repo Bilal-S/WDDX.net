@@ -61,13 +61,14 @@ namespace Mueller.Wddx
 
 			if (reader == null)
 			{
-				if (input is XmlValidatingReader)
+                if (input is XmlReader || input is XmlValidatingReader)  //was XmlValidatingReader
 				{
 					// The XmlValidatingReader does not support chunked Base64 decoding.
 					return Convert.FromBase64String(input.ReadString());
 				}
 				else
 					throw new ArgumentException("input must be an XmlTextReader or XmlValidatingReader.");
+                    //the above probably will not happen and can removed. XmlValidatingReader is obsolete
 			}
 
 			string LenAttribute = reader.GetAttribute("length");
