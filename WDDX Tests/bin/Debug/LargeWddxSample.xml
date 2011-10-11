@@ -1,0 +1,242 @@
+﻿<wddxPacket version='1.0'>
+    <header/>
+    <data>
+        <struct>
+            <var name='USERID'>
+                <number>2.0</number>
+            </var>
+            <var name='EVENT'>
+                <string>UPDATE</string>
+            </var>
+            <var name='EVENTDEFID'>
+                <string>401</string>
+            </var>
+            <var name='REFERENCE'>
+                <number>15993.0</number>
+            </var>
+            <var name='OBJECT'>
+                <string>INVOICE</string>
+            </var>
+            <var name='RECORDS'>
+                <struct>
+                    <var name='HEADER'>
+                        <recordset rowCount='1' fieldNames='VENDOR_ID,INVOICENUM,BILL_ID,PO_ID,OR_ID,WO_ID,VOID_ID,LOCATION_ID,COMPANY_ID,APACCCODE,DATEI,DATEC,DATER,DUEDATE,EXPORTDATE,NOTES,TAX,TAX2,TAX3,USETAX,FREIGHT,DISCOUNTAMT,INVOICETOTAL,CURRENCYCODE,RATE,RATETYPE_ID,PAYMENTTERM_ID,PAYMENTTYPE_ID,PAYMENTVENDOR_ID,PROJECT_ID,CREATEDBY_ID,USRITEM1,USRITEM2,USRITEM3,FLAGFORREVIEW,BILLSOURCE_ID,BILLSTATUS_ID,BILLTYPE_ID,SYSTEMNOTE,USETAXACCOUNT,FREIGHTACCOUNT,IMAGEREF,FLAGNOEXPORT,FLAGHASDISTRIBUTION,IMPORTMASTER_ID,INVOICETYPE_ID,PARENTBILL_ID,MASK_ID,VENDORNAME,LOCATIONNAME,PAYMENTTERMNAME,INVOICETYPENAME,DISPLAYNAME,PO_NUMBER,WO_NUMBER,PROJECTNAME,BILLSTATUSDESC,IMAGEREFDISPLAY,PAYMENTVENDORNAME,VendorAccCode,PaymentVendorAccCode' type='coldfusion.sql.QueryTable'>
+                            <field name='VENDOR_ID'>
+                                <number>246.0</number>
+                            </field>
+                            <field name='INVOICENUM'>
+                                <string>91-223-032-3541</string>
+                            </field>
+                            <field name='BILL_ID'>
+                                <number>15993.0</number>
+                            </field>
+                            <field name='PO_ID'>
+                                <number>252.0</number>
+                            </field>
+                            <field name='OR_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='WO_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='VOID_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='LOCATION_ID'>
+                                <number>99.0</number>
+                            </field>
+                            <field name='COMPANY_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='APACCCODE'>
+                                <string></string>
+                            </field>
+                            <field name='DATEI'>
+                                <dateTime>2011-10-06T17:59:56-04:00</dateTime>
+                            </field>
+                            <field name='DATEC'>
+                                <dateTime>2002-07-07T00:00:00-06:00</dateTime>
+                            </field>
+                            <field name='DATER'>
+                                <null/>
+                            </field>
+                            <field name='DUEDATE'>
+                                <dateTime>2002-06-09T00:00:00</dateTime>
+                            </field>
+                            <field name='EXPORTDATE'>
+                                <null/>
+                            </field>
+                            <field name='NOTES'>
+                                <string>BRYAN BORGER 5/12/12</string>
+                            </field>
+                            <field name='TAX'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='TAX2'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='TAX3'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='USETAX'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='FREIGHT'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='DISCOUNTAMT'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='INVOICETOTAL'>
+                                <number>252890.21</number>
+                            </field>
+                            <field name='CURRENCYCODE'>
+                                <string>USD</string>
+                            </field>
+                            <field name='RATE'>
+                                <number>1.0</number>
+                            </field>
+                            <field name='RATETYPE_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='PAYMENTTERM_ID'>
+                                <number>1.0</number>
+                            </field>
+                            <field name='PAYMENTTYPE_ID'>
+                                <number>3.0</number>
+                            </field>
+                            <field name='PAYMENTVENDOR_ID'>
+                                <number>899.0</number>
+                            </field>
+                            <field name='PROJECT_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='CREATEDBY_ID'>
+                                <number>6.0</number>
+                            </field>
+                            <field name='USRITEM1'>
+                                <string>07/07/2011</string>
+                            </field>
+                            <field name='USRITEM2'>
+                                <string>0</string>
+                            </field>
+                            <field name='USRITEM3'>
+                                <string></string>
+                            </field>
+                            <field name='FLAGFORREVIEW'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='BILLSOURCE_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='BILLSTATUS_ID'>
+                                <number>180.0</number>
+                            </field>
+                            <field name='BILLTYPE_ID'>
+                                <string>DR</string>
+                            </field>
+                            <field name='SYSTEMNOTE'>
+                                <string>Sample WDDX XML with a good bit more data for testing.</string>
+                            </field>
+                            <field name='USETAXACCOUNT'>
+                                <string></string>
+                            </field>
+                            <field name='FREIGHTACCOUNT'>
+                                <string></string>
+                            </field>
+                            <field name='IMAGEREF'>
+                                <string></string>
+                            </field>
+                            <field name='FLAGNOEXPORT'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='FLAGHASDISTRIBUTION'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='IMPORTMASTER_ID'>
+                                <number>31606.0</number>
+                            </field>
+                            <field name='INVOICETYPE_ID'>
+                                <number>1.0</number>
+                            </field>
+                            <field name='PARENTBILL_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='MASK_ID'>
+                                <number>0.0</number>
+                            </field>
+                            <field name='VENDORNAME'>
+                                <string>KRIO OFFICE - 111</string>
+                            </field>
+                            <field name='LOCATIONNAME'>
+                                <string>Bergen</string>
+                            </field>
+                            <field name='PAYMENTTERMNAME'>
+                                <string>Net 30</string>
+                            </field>
+                            <field name='INVOICETYPENAME'>
+                                <string>Default</string>
+                            </field>
+                            <field name='DISPLAYNAME'>
+                                <string>Herbert Smalls</string>
+                            </field>
+                            <field name='PO_NUMBER'>
+                                <string>23433</string>
+                            </field>
+                            <field name='WO_NUMBER'>
+                                <string></string>
+                            </field>
+                            <field name='PROJECTNAME'>
+                                <null/>
+                            </field>
+                            <field name='BILLSTATUSDESC'>
+                                <string>ready for payment</string>
+                            </field>
+                            <field name='IMAGEREFDISPLAY'>
+                                <string></string>
+                            </field>
+                            <field name='PAYMENTVENDORNAME'>
+                                <string>Kio Office, Inc.</string>
+                            </field>
+                            <field name='VendorAccCode'>
+                                <string>23314</string>
+                            </field>
+                            <field name='PaymentVendorAccCode'>
+                                <string>23313</string>
+                            </field>
+                        </recordset>
+                    </var>
+                    <var name='VENDORACCCODE'>
+                        <string>23314</string>
+                    </var>
+                    <var name='MAXCATEGORYSPENT'>
+                        <string>PTIO</string>
+                    </var>
+                    <var name='DISTRIBUTION'>
+                        <recordset rowCount='2' fieldNames='Bill_id,POLineAccCode,AccountTotal' type='coldfusion.sql.QueryTable'>
+                            <field name='Bill_id'>
+                                <number>15233.0</number>
+                                <number>15233.0</number>
+                            </field>
+                            <field name='POLineAccCode'>
+                                <string>GL9922-AB-9023</string>
+                                <string>GL9922-AB-9024</string>
+                            </field>
+                            <field name='AccountTotal'>
+                                <number>98366.36</number>
+                                <number>154523.85</number>
+                            </field>
+                        </recordset>
+                    </var>
+                </struct>
+            </var>
+            <var name='EXTENDED'>
+                <struct>
+                    <var name='OUTSIDEPROCESS'>
+                        <string>Another sample text here for testing</string>
+                    </var>
+                </struct>
+            </var>
+        </struct>
+    </data>
+</wddxPacket>
