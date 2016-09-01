@@ -1,8 +1,0 @@
-WDDX (Web Distributed Data eXchange) is a programming-language-, platform- and transport-neutral data interchange mechanism to pass data between different environments and different computers. This is WDDX implementation for .NET platforms. Source code is in C#. The realease dll is in releases subdirectory (wddx.net.dll).
-
-The .NET implementation is based on work from Joel Mueller.
-Changes in version 1.0.4 contributed by Bilal Soylu.
-
-
-Please review the Readme.htm file for release notes.
-Windows help (.chm) files are available in the Release directory.
