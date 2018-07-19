@@ -14,7 +14,6 @@ Windows help (.chm) files are available in the Release directory.
 
 **Version 1.0.4**
 
-[Joel Mueller](mailto:jmueller@swiftk.com)
 
 The only classes you need to know are WddxSerializer and WddxDeserializer. Click [here](WDDX.Net.chm) for documentation. For those who want to play with the source, full documentation on the internal API is also supplied [here](WDDX.Net%20Internals.chm). See the "WDDX Tests" project for usage samples and tests.
 
@@ -48,7 +47,7 @@ A System.Byte array (byte[] in C#, Byte() in VB.NET)
 
 * The precision of the System.Decimal type is not directly supported by WDDX; when serialized if numbers have higher precision than 15 they will be first converted to Double.
 
-**New in 1.0.4 (Bilal Soylu):**
+**New in 1.0.4:**
 
 *   updraded to .net framework 3
 *   updated unit test to nunit 2.5
